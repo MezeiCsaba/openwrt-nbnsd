@@ -22,3 +22,14 @@ add_executable(
     src/netbios.c
 
 )
+
+add_executable(
+
+    test_netbios
+
+    tests/test_netbios.c
+    src/netbios.c
+
+)
+
+target_include_directories(test_netbios PRIVATE include)
