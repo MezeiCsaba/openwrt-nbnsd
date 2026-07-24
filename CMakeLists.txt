@@ -13,8 +13,12 @@ add_compile_options(
 )
 
 add_executable(
+
     nbnsd
 
     src/main.c
     src/log.c
+    src/nbns.c
+    src/netbios.c
+
 )
