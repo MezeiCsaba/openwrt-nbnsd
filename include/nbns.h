@@ -1,44 +1,42 @@
-#ifndef NBNSD_NBNS_H
-#define NBNSD_NBNS_H
+#ifndef NBNS_H
+#define NBNS_H
 
+#include <stddef.h>
 #include <stdint.h>
 
-#define NBNS_PORT              137
+#include "netbios.h"
 
-#define NBNS_OPCODE_QUERY      0x0000
-
-#define NBNS_FLAG_RESPONSE     0x8000
-#define NBNS_FLAG_AUTHORITATIVE 0x0400
-#define NBNS_FLAG_RECURSION_DESIRED 0x0100
-#define NBNS_FLAG_RECURSION_AVAILABLE 0x0080
-
-#define NBNS_RCODE_OK          0x0000
-
-#define NBNS_TYPE_NB           0x0020
-#define NBNS_CLASS_IN          0x0001
-
-#pragma pack(push,1)
+#define NBNS_PORT 137
 
 typedef struct
 {
     uint16_t transaction_id;
     uint16_t flags;
-    uint16_t question_count;
-    uint16_t answer_count;
-    uint16_t authority_count;
-    uint16_t additional_count;
+
+    uint16_t questions;
+    uint16_t answer_rrs;
+    uint16_t authority_rrs;
+    uint16_t additional_rrs;
+
 } nbns_header_t;
 
-#pragma pack(pop)
+int nbns_parse_header(
+    const uint8_t *packet,
+    size_t length,
+    nbns_header_t *header);
+
+#endif
 
 typedef struct
 {
-    char name[17];
-
+    char name[NETBIOS_NAME_LEN + 1];
     uint16_t type;
-
     uint16_t class_id;
 
 } nbns_question_t;
 
-#endif
+int nbns_parse_question(
+    const uint8_t *packet,
+    size_t length,
+    size_t offset,
+    nbns_question_t *question);

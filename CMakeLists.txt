@@ -30,6 +30,31 @@ add_executable(
     tests/test_netbios.c
     src/netbios.c
 
+
 )
 
 target_include_directories(test_netbios PRIVATE include)
+
+add_executable(
+
+    test_nbns
+
+    tests/test_nbns.c
+    src/nbns.c
+    src/netbios.c
+
+)
+
+target_include_directories(test_nbns PRIVATE include)
+
+add_executable(
+
+    test_question
+
+    tests/test_question.c
+    src/nbns.c
+    src/netbios.c
+
+)
+
+target_include_directories(test_question PRIVATE include)
