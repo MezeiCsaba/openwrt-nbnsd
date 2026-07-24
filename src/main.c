@@ -1,7 +1,7 @@
-#include <stdio.h>
+#include "log.h"
 
 int main(void)
 {
-    printf("openwrt-nbnsd\n");
+    log_info("openwrt-nbnsd starting");
     return 0;
 }
