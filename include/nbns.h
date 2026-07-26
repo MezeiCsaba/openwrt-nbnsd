@@ -20,13 +20,6 @@ typedef struct
 
 } nbns_header_t;
 
-int nbns_parse_header(
-    const uint8_t *packet,
-    size_t length,
-    nbns_header_t *header);
-
-#endif
-
 typedef struct
 {
     char name[NETBIOS_NAME_LEN + 1];
@@ -35,8 +28,15 @@ typedef struct
 
 } nbns_question_t;
 
+int nbns_parse_header(
+    const uint8_t *packet,
+    size_t length,
+    nbns_header_t *header);
+
 int nbns_parse_question(
     const uint8_t *packet,
     size_t length,
     size_t offset,
     nbns_question_t *question);
+
+#endif

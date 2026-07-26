@@ -55,11 +55,8 @@ int nbns_parse_question(
         return -1;
     }
 
-    question->type =
-        read_u16(packet + offset + 33);
-
-    question->class_id =
-        read_u16(packet + offset + 35);
+    question->type = read_u16(packet + offset + 34);
+    question->class_id = read_u16(packet + offset + 36);
 
     return 0;
 }
